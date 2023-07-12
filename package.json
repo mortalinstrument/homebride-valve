@@ -1,5 +1,5 @@
 {
-  "name": "homebridge-web-valve-my",
+  "name": "homebridge-valve",
   "version": "1.0.0",
   "description": "Plugin for simulating valve to interact with web irrigation system tbd",
   "main": "dist/accessory.js",

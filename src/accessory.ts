@@ -1,7 +1,7 @@
 import { API, AccessoryPlugin, AccessoryConfig, HAP, Logger, Service, CharacteristicEventTypes, CharacteristicGetCallback, CharacteristicSetCallback, CharacteristicValue } from 'homebridge';
 
 export = (api: API) => {
-  api.registerAccessory("homebridge-web-valve", V);
+  api.registerAccessory("homebridge-valve", V);
 };
 
 class V implements AccessoryPlugin {
@@ -23,8 +23,6 @@ class V implements AccessoryPlugin {
       .setCharacteristic(this.hap.Characteristic.Model, "Irrigation Valve v1")
       .setCharacteristic(this.hap.Characteristic.SerialNumber, "420");
 
-    this.valveService.setCharacteristic(this.hap.Characteristic.ValveType, 2);
-
     this.valveService.getCharacteristic(this.hap.Characteristic.Active)
       .on(CharacteristicEventTypes.GET, this.handleActiveGet.bind(this))
       .on(CharacteristicEventTypes.SET, this.handleActiveSet.bind(this));
@@ -44,7 +42,7 @@ class V implements AccessoryPlugin {
 
   handleActiveSet(value: CharacteristicValue, callback: CharacteristicSetCallback) {
     this.log.debug('Triggered SET Active:', value);
-    callback(null);
+    callback(null, value);
   }
 
   handleInUseGet(callback: CharacteristicGetCallback) {
@@ -55,7 +53,7 @@ class V implements AccessoryPlugin {
 
   handleValveTypeGet(callback: CharacteristicGetCallback) {
     this.log.debug('Triggered GET ValveType');
-    const currentValue = this.hap.Characteristic.ValveType.GENERIC_VALVE;
+    const currentValue = this.hap.Characteristic.ValveType.IRRIGATION;
     callback(null, currentValue);
   }
 
