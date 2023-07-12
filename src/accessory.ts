@@ -21,7 +21,7 @@ class V implements AccessoryPlugin {
     this.active = this.hap.Characteristic.Active.INACTIVE
     this.inUse = this.hap.Characteristic.InUse.NOT_IN_USE
 
-    this.valveService = new this.hap.Service.IrrigationSystem(V.name);
+    this.valveService = new this.hap.Service.Valve(V.name);
 
     this.informationService = new this.hap.Service.AccessoryInformation()
       .setCharacteristic(this.hap.Characteristic.Manufacturer, "David Koller")
@@ -52,7 +52,7 @@ class V implements AccessoryPlugin {
       this.inUse = this.hap.Characteristic.InUse.IN_USE
     } else if(value == 0){
       this.active = this.hap.Characteristic.Active.INACTIVE
-      this.inUse   = this.hap.Characteristic.InUse.NOT_IN_USE
+      this.inUse = this.hap.Characteristic.InUse.NOT_IN_USE
     }
     
     callback(null);
