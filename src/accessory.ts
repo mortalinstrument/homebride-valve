@@ -21,7 +21,7 @@ class V implements AccessoryPlugin {
     this.active = this.hap.Characteristic.Active.INACTIVE
     this.inUse = this.hap.Characteristic.InUse.NOT_IN_USE
 
-    this.valveService = new this.hap.Service.Valve(V.name);
+    this.valveService = new this.hap.Service.IrrigationSystem(V.name);
 
     this.informationService = new this.hap.Service.AccessoryInformation()
       .setCharacteristic(this.hap.Characteristic.Manufacturer, "David Koller")
@@ -35,9 +35,6 @@ class V implements AccessoryPlugin {
     this.valveService.getCharacteristic(this.hap.Characteristic.InUse)
       .on(CharacteristicEventTypes.GET, this.handleInUseGet.bind(this))
       .on(CharacteristicEventTypes.SET, this.handleInUseSet.bind(this));
-
-    this.valveService.getCharacteristic(this.hap.Characteristic.ValveType)
-      .on(CharacteristicEventTypes.GET, this.handleValveTypeGet.bind(this));
   }
 
   handleActiveGet(callback: CharacteristicGetCallback) {
@@ -71,12 +68,6 @@ class V implements AccessoryPlugin {
       this.active = this.hap.Characteristic.InUse.NOT_IN_USE
     }
     callback(null)
-  }
-
-  handleValveTypeGet(callback: CharacteristicGetCallback) {
-    this.log.debug('Triggered GET ValveType');
-    const currentValue = this.hap.Characteristic.ValveType.WATER_FAUCET;
-    callback(null, currentValue);
   }
 
   getServices(): Service[] {
