@@ -1,0 +1,40 @@
+{
+  "name": "homebridge-web-valve-my",
+  "version": "1.0.0",
+  "description": "Plugin for simulating valve to interact with web irrigation system tbd",
+  "main": "dist/accessory.js",
+  "scripts": {
+    "clean": "rimraf ./dist",
+    "build": "rimraf ./dist && tsc",
+    "prepublishOnly": "npm run build",
+    "postpublish": "npm run clean",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "David Koller",
+  "engines": {
+    "homebridge": ">=1.0.0"
+  },
+  "keywords": [
+    "homebridge-plugin"
+  ],
+  "license": "ISC",
+  "files": [
+    "LICENSE",
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/homebridge/homebridge-examples.git"
+  },
+  "bugs": {
+    "url": "https://github.com/homebridge/homebridge-examples/issues"
+  },
+  "devDependencies": {
+    "@types/node": "16.11.7",
+    "homebridge": "^1.6.1",
+    "rimraf": "^5.0.0",
+    "typescript": "^5.0.4"
+  },
+  "dependencies": {
+  }
+}
