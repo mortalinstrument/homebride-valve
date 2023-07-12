@@ -42,7 +42,7 @@ class V implements AccessoryPlugin {
 
   handleActiveSet(value: CharacteristicValue, callback: CharacteristicSetCallback) {
     this.log.debug('Triggered SET Active:', value);
-    callback(null, value);
+    callback(null);
   }
 
   handleInUseGet(callback: CharacteristicGetCallback) {
