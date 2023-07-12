@@ -52,6 +52,7 @@ class V implements AccessoryPlugin {
     } else if(value == 0){
       this.active = this.hap.Characteristic.Active.INACTIVE
     }
+    this.handleInUseSet(value, callback)
     callback(null);
   }
 
