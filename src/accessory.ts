@@ -75,7 +75,7 @@ class V implements AccessoryPlugin {
 
   handleValveTypeGet(callback: CharacteristicGetCallback) {
     this.log.debug('Triggered GET ValveType');
-    const currentValue = this.hap.Characteristic.ValveType.IRRIGATION;
+    const currentValue = this.hap.Characteristic.ValveType.WATER_FAUCET;
     callback(null, currentValue);
   }
 
