@@ -47,7 +47,11 @@ class V implements AccessoryPlugin {
 
   handleActiveSet(value: CharacteristicValue, callback: CharacteristicSetCallback) {
     this.log.debug('Triggered SET Active:', value);
-    this.active = value
+    if(value == 1){
+      this.active = this.hap.Characteristic.Active.ACTIVE
+    } else if(value == 0){
+      this.active = this.hap.Characteristic.Active.INACTIVE
+    }
     callback(null);
   }
 
@@ -58,7 +62,11 @@ class V implements AccessoryPlugin {
 
   handleInUseSet(value: CharacteristicValue, callback: CharacteristicSetCallback){
     this.log.debug('Trigered SET InUse');
-    this.inUse = value
+    if(value == 1){
+      this.active = this.hap.Characteristic.InUse.IN_USE
+    } else if(value == 0){
+      this.active = this.hap.Characteristic.InUse.NOT_IN_USE
+    }
     callback(null)
   }
 
