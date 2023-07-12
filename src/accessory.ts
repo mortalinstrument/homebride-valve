@@ -49,10 +49,10 @@ class V implements AccessoryPlugin {
     this.log.debug('Triggered SET Active:', value);
     if(value == 1){
       this.active = this.hap.Characteristic.Active.ACTIVE
-      this.active = this.hap.Characteristic.InUse.IN_USE
+      this.inUse = this.hap.Characteristic.InUse.IN_USE
     } else if(value == 0){
       this.active = this.hap.Characteristic.Active.INACTIVE
-      this.active = this.hap.Characteristic.InUse.NOT_IN_USE
+      this.inUse = this.hap.Characteristic.InUse.NOT_IN_USE
     }
     
     callback(null);
