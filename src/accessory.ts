@@ -19,7 +19,7 @@ class V implements AccessoryPlugin {
     this.config = config;
     this.hap = api.hap;
     this.active = this.hap.Characteristic.Active.INACTIVE
-    this.inUse = this.hap.Characteristic.InUse.NOT_IN_USE
+    this.inUse = this.hap.Characteristic.InUse.IN_USE
 
     this.valveService = new this.hap.Service.Valve(V.name);
 
