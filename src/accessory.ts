@@ -10,11 +10,16 @@ class V implements AccessoryPlugin {
   private readonly informationService: Service;
   private readonly config: AccessoryConfig;
   private readonly hap: HAP;
+  private active: CharacteristicValue;
+  private inUse: CharacteristicValue;
+
 
   constructor(log: Logger, config: AccessoryConfig, api: API) {
     this.log = log;
     this.config = config;
     this.hap = api.hap;
+    this.active = this.hap.Characteristic.Active.INACTIVE
+    this.inUse = this.hap.Characteristic.InUse.NOT_IN_USE
 
     this.valveService = new this.hap.Service.Valve(V.name);
 
@@ -28,7 +33,8 @@ class V implements AccessoryPlugin {
       .on(CharacteristicEventTypes.SET, this.handleActiveSet.bind(this));
 
     this.valveService.getCharacteristic(this.hap.Characteristic.InUse)
-      .on(CharacteristicEventTypes.GET, this.handleInUseGet.bind(this));
+      .on(CharacteristicEventTypes.GET, this.handleInUseGet.bind(this))
+      .on(CharacteristicEventTypes.SET, this.handleInUseSet.bind(this));
 
     this.valveService.getCharacteristic(this.hap.Characteristic.ValveType)
       .on(CharacteristicEventTypes.GET, this.handleValveTypeGet.bind(this));
@@ -36,19 +42,24 @@ class V implements AccessoryPlugin {
 
   handleActiveGet(callback: CharacteristicGetCallback) {
     this.log.debug('Triggered GET Active');
-    const currentValue = this.hap.Characteristic.Active.INACTIVE;
-    callback(null, currentValue);
+    callback(null, this.active);
   }
 
   handleActiveSet(value: CharacteristicValue, callback: CharacteristicSetCallback) {
     this.log.debug('Triggered SET Active:', value);
+    this.active = value
     callback(null);
   }
 
   handleInUseGet(callback: CharacteristicGetCallback) {
     this.log.debug('Triggered GET InUse');
-    const currentValue = this.hap.Characteristic.InUse.NOT_IN_USE;
-    callback(null, currentValue);
+    callback(null, this.inUse);
+  }
+
+  handleInUseSet(value: CharacteristicValue, callback: CharacteristicSetCallback){
+    this.log.debug('Trigered SET InUse');
+    this.inUse = value
+    callback(null)
   }
 
   handleValveTypeGet(callback: CharacteristicGetCallback) {
